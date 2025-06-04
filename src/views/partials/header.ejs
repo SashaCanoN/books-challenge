@@ -11,8 +11,13 @@
     </ul>
 
     <div class="col-md-3 text-end">
-      <a href="/users/login" class="btn btn-outline-primary me-2">Login</a>
-      <a href="/users/register" class="btn btn-outline-primary me-2">Sign-up</a>
+      <% if (user) { %>
+        <a href="/logout" class="btn btn-danger me-2">Logout</a>
+        <p class="text-muted d-inline">Bienvenido, <%= user.email %></p>
+      <% } else { %>
+        <a href="/users/login" class="btn btn-outline-primary me-2">Login</a>
+        <a href="/users/register" class="btn btn-outline-primary me-2">Sign-up</a>
+      <% } %>
     </div>
   </header>
 </div>
