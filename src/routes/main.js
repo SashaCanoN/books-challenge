@@ -1,20 +1,24 @@
 const express = require('express');
-const mainController = require('../controllers/main');
-
 const router = express.Router();
+const bookController = require('../controllers/bookController');
+const userController = require('../controllers/userController');
+const { isAdmin, isLoggedIn } = require('../middlewares/authMiddleware');
 
-router.get('/', mainController.home);
-router.get('/books/detail/:id', mainController.bookDetail);
-router.get('/books/search', mainController.bookSearch);
-router.post('/books/search', mainController.bookSearchResult);
-router.get('/authors', mainController.authors);
-router.get('/authors/:id/books', mainController.authorBooks);
-router.get('/users/register', mainController.register);
-router.post('/users/register', mainController.processRegister);
-router.get('/users/login', mainController.login);
-router.post('/users/login', mainController.processLogin);
-router.delete('/books/:id', mainController.deleteBook);
-router.get('/books/edit/:id', mainController.edit);
-router.put('/books/edit/:id', mainController.processEdit);
+router.get('/', bookController.home);
+
+router.get('/books/:id', bookController.bookDetail);
+router.post('/books/search', bookController.searchBooks);
+router.get('/authors', bookController.authorsList);
+router.get('/authors/:id/books', bookController.booksByAuthor);
+
+router.get('/books/:id/edit', isAdmin, bookController.editForm);
+router.put('/books/:id', isAdmin, bookController.updateBook);
+router.delete('/books/:id', isAdmin, bookController.deleteBook);
+
+router.get('/register', userController.registerForm);
+router.post('/register', userController.registerUser);
+router.get('/login', userController.loginForm);
+router.post('/login', userController.loginUser);
+router.get('/logout', userController.logoutUser);
 
 module.exports = router;

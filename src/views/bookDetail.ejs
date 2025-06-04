@@ -16,22 +16,24 @@
         <img class="d-block mx-auto mb-4" src="<%= book.imageUrl %>" alt="<%= book.title %>" width="172" height="257">
         <h1 class="display-5 fw-bold"><%= book.title %></h1>
         <div class="col-lg-6 mx-auto">
-          <p class="lead mb-4 fw-bold">Authors: <%= book.author %></p>
-          <p class="lead mb-4 fw-bold">Release Date: <%= book.releaseDate %></p>
+          <p class="lead mb-4 fw-bold">Autor: <%= book.author?.name || book.author %></p>
+          <p class="lead mb-4 fw-bold">Fecha de publicación: <%= book.releaseDate %></p>
           <p class="lead mb-4"><%= book.description %></p>
 
           <% if (user) { %>
-            <p class="text-muted">Usuario logueado: <%= user.email %> - Admin: <%= user.isAdmin ? 'Sí' : 'No' %></p>
+            <p class="text-muted">Usuario: <%= user.email %> — Admin: <%= user.isAdmin ? 'Sí' : 'No' %></p>
           <% } %>
 
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <% if (user && user.isAdmin) { %>
-              <a href="/books/<%= book.id %>/edit" class="btn btn-primary btn-lg px-4 gap-3">Editar</a>
-              <form action="/books/<%= book.id %>/delete" method="POST" style="display:inline;">
-                <button type="submit" class="btn btn-outline-secondary btn-lg px-4">Eliminar</button>
+          <% if (user && user.isAdmin) { %>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <a href="/books/edit/<%= book.id %>" class="btn btn-primary btn-lg px-4 gap-3">Editar</a>
+              <form action="/books/<%= book.id %>?_method=DELETE" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-outline-danger btn-lg px-4" onclick="return confirm('¿Estás seguro que deseas eliminar este libro?');">
+                  Eliminar
+                </button>
               </form>
-            <% } %>
-          </div>
+            </div>
+          <% } %>
         </div>
       </div>
     </div>

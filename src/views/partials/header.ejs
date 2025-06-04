@@ -1,7 +1,8 @@
 <div class="container">
   <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/VisualEditor_-_Icon_-_Open-book-2.svg/1024px-VisualEditor_-_Icon_-_Open-book-2.svg.png" alt="twbs" width="50" height="50" class="rounded-circle flex-shrink-0">
+    
+    <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none" aria-label="Books Home">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/VisualEditor_-_Icon_-_Open-book-2.svg/1024px-VisualEditor_-_Icon_-_Open-book-2.svg.png" alt="Book Icon" width="50" height="50" class="rounded-circle flex-shrink-0">
     </a>
 
     <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -10,14 +11,15 @@
       <li><a href="/books/search" class="nav-link px-2 link-dark">Search</a></li>
     </ul>
 
-    <div class="col-md-3 text-end">
+    <div class="col-md-3 text-end d-flex justify-content-end align-items-center gap-2">
       <% if (user) { %>
-        <a href="/logout" class="btn btn-danger me-2">Logout</a>
-        <p class="text-muted d-inline">Bienvenido, <%= user.email %></p>
+        <span class="text-muted small">Bienvenido, <%= user.email %></span>
+        <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
       <% } else { %>
-        <a href="/users/login" class="btn btn-outline-primary me-2">Login</a>
-        <a href="/users/register" class="btn btn-outline-primary me-2">Sign-up</a>
+        <a href="/users/login" class="btn btn-outline-primary btn-sm">Login</a>
+        <a href="/users/register" class="btn btn-outline-primary btn-sm">Sign-up</a>
       <% } %>
     </div>
+    
   </header>
 </div>
